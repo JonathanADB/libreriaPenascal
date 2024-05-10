@@ -121,3 +121,46 @@ $(document).ready(function(){
 
 }
 
+
+
+/* Para editar el modal */
+
+$(document).ready(function(){
+    // Delegación de eventos para el botón de editar
+    $("#libros-table").on("click", ".btn-edit", function(){
+        // Obtener los datos del libro de la fila de la tabla
+        const row = $(this).closest("tr");
+        const title = row.find("td:eq(1)").text();
+        const year = row.find("td:eq(2)").text();
+        const author = row.find("td:eq(3)").text();
+
+        // Llenar el formulario de edición con los datos del libro
+        $("#editTitle").val(title);
+        $("#editYear").val(year);
+        $("#editAuthor").val(author);
+
+        // Guardar el ID de la fila que se está editando
+        $("#editId").val(row.index());
+
+        // Mostrar el modal de edición
+        $("#editModal").modal("show");
+    });
+
+    // Evento de clic en el botón de guardar en el modal de edición
+    $("#saveChanges").click(function(){
+        // Obtener los nuevos valores del formulario de edición
+        const title = $("#editTitle").val();
+        const year = $("#editYear").val();
+        const author = $("#editAuthor").val();
+        const rowIndex = $("#editId").val();
+
+        // Actualizar los datos en la fila correspondiente de la tabla
+        const row = $("#libros-table tbody tr").eq(rowIndex);
+        row.find("td:eq(1)").text(title);
+        row.find("td:eq(2)").text(year);
+        row.find("td:eq(3)").text(author);
+
+        // Cerrar el modal de edición
+        $("#editModal").modal("hide");
+    });
+});
