@@ -52,6 +52,21 @@ document.addEventListener('DOMContentLoaded', function() {
     authorInput.addEventListener('input', validarCampos);
 });
 
+// Evento que se ejecuta cuando se envía el formulario
+document.getElementById("mi-formulario").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevenir el envío del formulario por defecto
+
+    // Obtener los valores del formulario
+     const title = document.getElementById("title").value;
+     const year = document.getElementById("year").value;
+     const author = document.getElementById("author").value;
+
+    // Agregar el libro a la tabla
+    agregarLibroATabla(title, year, author);
+
+    // Restablecer el formulario
+    this.reset();
+});
 
 
 /* script para el modal */
@@ -93,21 +108,16 @@ $(document).ready(function(){
     cellYear.innerHTML = year;
     cellAuthor.innerHTML = author;
     cellEdit.innerHTML = '<button class="btn btn-primary btn-sm btn-edit">Edit</button>';
-    cellDelete.innerHTML = '<form><button type="submit" class="btn btn-danger btn-sm">Delete</button></form>';
+    cellDelete.innerHTML = '<form><button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button></form>';
+
+      // Agregar evento de clic al botón de eliminar
+      cellDelete.querySelector('.btn-delete').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevenir el envío del formulario por defecto
+        // Obtener la fila a la que pertenece el botón
+        const row = this.closest('tr');
+        // Eliminar la fila de la tabla
+        row.parentNode.removeChild(row);
+    });
+
 }
 
-// Evento que se ejecuta cuando se envía el formulario
-document.getElementById("mi-formulario").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevenir el envío del formulario por defecto
-
-    // Obtener los valores del formulario
-     const title = document.getElementById("title").value;
-     const year = document.getElementById("year").value;
-     const author = document.getElementById("author").value;
-
-    // Agregar el libro a la tabla
-    agregarLibroATabla(title, year, author);
-
-    // Restablecer el formulario
-    this.reset();
-});
