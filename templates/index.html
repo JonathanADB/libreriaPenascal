@@ -37,10 +37,8 @@
                     </div>
                     <div id="general-error" class="error"></div> <!-- Mensaje de error general -->
                 </form>
-                
-                
 
-               <!-- Tabla -->
+  <!-- Tabla -->
                <table id="libros-table" class="table table-bordered">
                 <!-- Encabezados de la tabla -->
                 <thead>
@@ -103,6 +101,28 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../static/script.js"></script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#agregar-libro').click(function() {
+            $('#libros-inputs').append('<div class="row mb-3 libro-input">' +
+                '<div class="col">' +
+                '<label for="titulo">Título</label>' +
+                '<input type="text" class="form-control mb-3" id="titulo" name="titulo[]">' +
+                '</div>' +
+                '<div class="col">' +
+                '<label for="autor">Autor</label>' +
+                '<input type="text" class="form-control mb-3" id="autor" name="autor[]">' +
+                '</div>' +
+                '<div class="col">' +
+                '<label for="año">Año</label>' +
+                '<input type="number" class="form-control mb-3" id="año" name="año[]">' +
+                '</div>' +
+                '</div>');
+        });
+    });
+</script>
 
     
 </body>

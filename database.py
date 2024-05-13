@@ -51,12 +51,13 @@ def insert_book(titulo, autor, año):
     params = (titulo, autor, año)
     execute_modify_query(query, params)
 
-################ Funcion insertar muchos libros de una
-def insert_books(titulo, autor, año):
-    conn = sqlite3.connect('libros.db')
+
+# Funcion para insertar muchos libros a la vez
+def insert_books(books):
+    conn = connect_db()
     cursor = conn.cursor()
-    query = f"INSERT INTO libros VALUES (?, ?, ?)"
-    cursor.executemany(query, titulo, autor, año)
+    query = "INSERT INTO libros (titulo, autor, año) VALUES (?, ?, ?)"
+    cursor.executemany(query, books)
     conn.commit()
     conn.close()
 
@@ -66,11 +67,10 @@ def delete_book(libro_id):
     params = (libro_id,)
     execute_modify_query(query, params)
 
-# Crear la base de datos y la tabla si no existen
-""" create_database() """
-""" insert_book("Jony", "Elias", 2024) """
+""" # Crear la base de datos y la tabla si no existen
+create_database()  """
 
-insert_books = [
+""" initial_books = [
     ("La sombra del viento", "Carlos Ruiz Zafón", 2001),
     ("1984", "George Orwell", 1949),
     ("Cien años de soledad", "Gabriel García Márquez", 1967),
@@ -92,3 +92,7 @@ insert_books = [
     ("Anna Karenina", "Leo Tolstoy", 1877),
     ("Moby Dick", "Herman Melville", 1851)
 ]
+
+insert_books(initial_books) """
+
+insert_book("ELIAS", "ES un autor", 2024)
